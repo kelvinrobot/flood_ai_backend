@@ -1,0 +1,26 @@
+# Core 
+fastapi==0.110.0
+uvicorn[standard]==0.29.0
+pydantic==2.7.1
+
+#  ML Models 
+catboost==1.2.3
+xgboost==2.0.3
+torch==2.2.2
+scikit-learn==1.4.2
+
+#  Data 
+pandas==2.2.2
+numpy==1.26.4
+joblib==1.4.2
+
+#Streamlit 
+streamlit==1.35.0
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# For PDF Export 
+fpdf==1.7.2
+
+# Imbalanced Data 
+imbalanced-learn==0.12.2
