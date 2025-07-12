@@ -1,0 +1,17 @@
+# Ignore virtual environments
+venv/
+.env/
+__pycache__/
+*.pyc
+
+# Ignore model checkpoints or temp files
+*.pth
+*.pkl
+*.cbm
+*.joblib
+
+# Optional: exclude OS or IDE clutter
+.DS_Store
+*.swp
+.idea/
+.vscode/
