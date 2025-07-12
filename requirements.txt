@@ -4,7 +4,7 @@ uvicorn[standard]==0.29.0
 pydantic==1.10.14
 
 # ML Models
-catboost==1.1.1         
+catboost==1.2.3         #  Safe, has prebuilt wheel  no Rust
 xgboost==2.0.3
 torch==2.2.2
 scikit-learn==1.4.2
@@ -14,7 +14,7 @@ pandas==2.2.2
 numpy==1.26.4
 joblib==1.4.2
 
-# Streamlit
+# Streamlit 
 streamlit==1.35.0
 matplotlib==3.8.4
 seaborn==0.13.2
@@ -24,6 +24,3 @@ fpdf==1.7.2
 
 # Imbalanced Data
 imbalanced-learn==0.12.2
-
-
-
