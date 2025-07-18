@@ -3,7 +3,7 @@ fastapi
 uvicorn
 pydantic
  
-multipart
+python-multipart
 
 # ML Models
 catboost       #  Safe, has prebuilt wheel  no Rust
@@ -13,6 +13,7 @@ scikit-learn
 
 # Data
 pandas
+
 numpy
 joblib
 
