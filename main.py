@@ -10,6 +10,10 @@ from app.retrain import retrain_all_models
 
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"message": "Flood AI backend is live and running!"}
+
 @app.post("/predict", response_model=FloodResponse)
 def predict_endpoint(payload: FloodRequest):
     return predict_flood(payload)
