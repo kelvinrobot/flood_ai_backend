@@ -61,7 +61,7 @@ if submit:
         "month": month
     }
 
-    response = requests.post("http://localhost:8000/predict", json=payload)
+    response = requests.post("https://flood-ai-backend-3.onrender.com/predict", json=payload)
 
     if response.status_code == 200:
         result = response.json()
@@ -129,17 +129,7 @@ if submit:
         ax.set_xlabel("Risk Score (%)")
         st.pyplot(fig)
 
- # LSTM Confidence Plot 
-        st.subheader(" LSTM Confidence Level")
-        lstm_vote = "LSTM: yes" in result["model_votes"]
-        fig, ax = plt.subplots(figsize=(5, 2))
-        ax.bar(["LSTM"], [1 if lstm_vote else 0], color="#6495ED")
-        ax.set_ylim(0, 1.2)
-        ax.axhline(0.5, color='gray', linestyle='--', label='Threshold')
-        ax.set_ylabel("Confidence")
-        ax.set_title("LSTM Binary Confidence")
-        ax.legend()
-        st.pyplot(fig)
+ 
 
          # Radar Chart
         st.subheader(" Model Confidence Radar")
