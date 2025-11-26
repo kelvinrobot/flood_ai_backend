@@ -1,7 +1,6 @@
-
-
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 import io
 from app.model_fusion import predict_flood
@@ -9,6 +8,15 @@ from app.schemas import FloodRequest, FloodResponse
 from app.retrain import retrain_all_models
 
 app = FastAPI()
+
+#  CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins - change this to your frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/")
 def read_root():
