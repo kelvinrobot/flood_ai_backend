@@ -9,14 +9,29 @@ from app.retrain import retrain_all_models
 
 app = FastAPI()
 
-#  CORS middleware
+# Comprehensive CORS middleware configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins - change this to your frontend URL in production
+    allow_origins=["*"],  # Allows all origins
     allow_credentials=True,
-    allow_methods=["*"],  # Allows all methods
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],  # Explicitly list all methods
     allow_headers=["*"],  # Allows all headers
+    expose_headers=["*"],  # Expose all headers to browser
+    max_age=600,  # Cache preflight requests for 10 minutes
 )
+
+# Add global OPTIONS handler for all endpoints
+@app.options("/{rest_of_path:path}")
+async def options_handler(rest_of_path: str):
+    return JSONResponse(
+        content={"message": "CORS preflight"},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS, PATCH",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Max-Age": "600"
+        }
+    )
 
 @app.get("/")
 def read_root():
@@ -38,3 +53,12 @@ def upload_dataset(file: UploadFile = File(...)):
         return {"message": " Models retrained successfully with uploaded dataset."}
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
+
+# Add response headers to all responses
+@app.middleware("http")
+async def add_cors_headers(request, call_next):
+    response = await call_next(request)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS, PATCH"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    return response
